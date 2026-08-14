@@ -98,12 +98,12 @@ Let
 
 $$
 \Omega_4=
-\left\{
+\{
 A=(a_{ij})\in\mathbb R^{4\times4}:
 a_{ij}\ge0,\quad
 \sum_{j=1}^4a_{ij}=1,\quad
 \sum_{i=1}^4a_{ij}=1
-\right\}.
+\}.
 $$
 
 The permanent of a matrix $A$ is
