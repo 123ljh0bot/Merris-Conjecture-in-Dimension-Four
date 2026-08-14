@@ -6,14 +6,14 @@ $A\in\mathbb R^{4\times4}$, let $A(r\mid c)$ denote the $3\times3$ matrix
 obtained by deleting row $r$ and column $c$, and define
 
 $$
-S_c(A)=\sum_{r=1}^4\operatorname{per}(A(r\mid c)).
+S_c(A)=\sum_{r=1}^4\mathrm{per}(A(r\mid c)).
 $$
 
 The target inequality is
 
 $$
 \boxed{
-4\operatorname{per}(A)\ge
+4\mathrm{per}(A)\ge
 \min_{1\le c\le4}S_c(A).
 }
 $$
@@ -23,7 +23,7 @@ Holens--Đoković inequality for the parameter case $(n,i)=(4,4)$,
 
 $$
 \boxed{
-16\operatorname{per}(A)\ge
+16\mathrm{per}(A)\ge
 \sum_{c=1}^4S_c(A).
 }
 $$
@@ -37,7 +37,7 @@ $$
 Combining these inequalities and dividing by $4$ gives
 
 $$
-4\operatorname{per}(A)\ge S_{c_{\min}}(A)
+4\mathrm{per}(A)\ge S_{c_{\min}}(A)
 =\min_{1\le c\le4}S_c(A),
 $$
 
@@ -59,13 +59,13 @@ Matrix* (American Mathematical Monthly 80 (1973), 791--793,
 A later paper quotes Merris' general conjecture as
 
 $$
-n\operatorname{per}(A)\ge
-\min_{1\le i\le n}\sum_{j=1}^n\operatorname{per}(A(j\mid i)),
+n\mathrm{per}(A)\ge
+\min_{1\le i\le n}\sum_{j=1}^n\mathrm{per}(A(j\mid i)),
 $$
 
 where $A(j\mid i)$ is obtained by deleting the $j$th row and the $i$th
 column. Setting $n=4$ gives exactly the target displayed above; the notation
-$c=i$, $r=j$, and $S_c(A)=\sum_r\operatorname{per}(A(r\mid c))$ only renames
+$c=i$, $r=j$, and $S_c(A)=\sum_r\mathrm{per}(A(r\mid c))$ only renames
 the indices. 
 That paper also described the conjecture as open for $n\ge4$. This repository
 records a Lean-checked proof artifact.
@@ -109,14 +109,14 @@ $$
 The permanent of a matrix $A$ is
 
 $$
-\operatorname{per}(A)=
+\mathrm{per}(A)=
 \sum_{\sigma\in S_4}\prod_{i=1}^4a_{i,\sigma(i)}.
 $$
 
 For each column $c$, put
 
 $$
-S_c(A)=\sum_{r=1}^4\operatorname{per}(A(r\mid c)).
+S_c(A)=\sum_{r=1}^4\mathrm{per}(A(r\mid c)).
 $$
 
 The $n=4$ case of Merris' conjecture asks whether every $A\in\Omega_4$
@@ -124,7 +124,7 @@ satisfies
 
 $$
 \boxed{
-4\operatorname{per}(A)\ge\min_{1\le c\le4}S_c(A).
+4\mathrm{per}(A)\ge\min_{1\le c\le4}S_c(A).
 }
 $$
 
@@ -153,7 +153,7 @@ following meaning:
 | `h_nonneg : ∀ i j, 0 ≤ A i j` | Every entry $a_{ij}$ is nonnegative. |
 | `h_rows : ∀ i, ∑ j, A i j = 1` | Every row of $A$ has sum $1$. |
 | `h_columns : ∀ j, ∑ i, A i j = 1` | Every column of $A$ has sum $1$. |
-| `per(A)` | $\operatorname{per}(A)$, the permanent of $A$. |
+| `per(A)` | $\mathrm{per}(A)$, the permanent of $A$. |
 | `A(j ∣ i)` | The $3\times3$ matrix obtained by deleting row $j$ and column $i$ from $A$. |
 | `per(A(j ∣ i))` | The permanent of that complementary $3\times3$ submatrix. |
 | `∑ j : Fin 4, per(A(j ∣ i))` | For a fixed column $i$, sum the four permanents obtained by deleting each row in turn. |
@@ -175,8 +175,8 @@ delete-row/delete-column meaning.
 Consequently, this symbolic Lean statement expands definitionally to
 
 $$
-4\operatorname{per}(A)\ge
-\min_{1\le i\le4}\sum_{j=1}^4\operatorname{per}(A(j\mid i)),
+4\mathrm{per}(A)\ge
+\min_{1\le i\le4}\sum_{j=1}^4\mathrm{per}(A(j\mid i)),
 $$
 
 which is the paper's Merris formula specialized to $n=4$.
@@ -201,15 +201,15 @@ $$
 16\sigma_4(A)\ge\sigma_3(A).
 $$
 
-Here $\sigma_4(A)=\operatorname{per}(A)$, while every $3\times3$
+Here $\sigma_4(A)=\mathrm{per}(A)$, while every $3\times3$
 submatrix is obtained by deleting one row and one column. Thus the standard
 paper form used as the stronger intermediate result is
 
 $$
 \boxed{
-16\operatorname{per}(A)\ge
+16\mathrm{per}(A)\ge
 \sum_{c=1}^4\sum_{r=1}^4
-\operatorname{per}(A(r\mid c)).
+\mathrm{per}(A(r\mid c)).
 }
 $$
 
@@ -228,11 +228,11 @@ theorem holens_djokovic_4_4
 This Lean conclusion is symbol-for-symbol aligned with
 
 $$
-16\operatorname{per}(A)\ge
-\sum_{i=1}^4\sum_{j=1}^4\operatorname{per}(A(j\mid i)).
+16\mathrm{per}(A)\ge
+\sum_{i=1}^4\sum_{j=1}^4\mathrm{per}(A(j\mid i)).
 $$
 
-Here `per(A)` means $\operatorname{per}(A)$, and `per(A(j ∣ i))` means the
+Here `per(A)` means $\mathrm{per}(A)$, and `per(A(j ∣ i))` means the
 permanent after deleting row $j$ and column $i$. For each fixed deleted column
 $i$, the inner sum runs over the four deleted rows $j$; the outer sum then
 runs over all four deleted columns. The right-hand side contains all sixteen
@@ -247,13 +247,13 @@ Lean checks the two main results in the proof chain.
 1. **Merris `n = 4`:** for every $4\times4$ doubly stochastic real matrix,
 
    $$
-   4\operatorname{per}(A)\ge\min_{1\le c\le4}S_c(A).
+   4\mathrm{per}(A)\ge\min_{1\le c\le4}S_c(A).
    $$
 2. **Holens--Đoković `(4,4)`:** the stronger standard subpermanent
    inequality
 
    $$
-   16\operatorname{per}(A)\ge\sum_{c=1}^4S_c(A)
+   16\mathrm{per}(A)\ge\sum_{c=1}^4S_c(A)
    $$
 
    holds for every $4\times4$ doubly stochastic real matrix.
@@ -285,7 +285,7 @@ This converts the original problem, without relaxation, into the nonnegativity
 of the nine-variable polynomial corresponding to the equivalent cubic form
 
 $$
-\Phi(u)=24\operatorname{per}(A(u))-2-
+\Phi(u)=24\mathrm{per}(A(u))-2-
 \sum_{i,j=1}^4a_{ij}(u)^3
 $$
 
@@ -340,7 +340,7 @@ Write
 $$
 \sigma_3(A)=
 \sum_{c=1}^4\sum_{r=1}^4
-\operatorname{per}(A(r\mid c)).
+\mathrm{per}(A(r\mid c)).
 $$
 
 The formalization proves the following identity for every $4\times4$ doubly
@@ -353,9 +353,9 @@ $$
 Consequently,
 
 $$
-16\operatorname{per}(A)\ge\sigma_3(A)
+16\mathrm{per}(A)\ge\sigma_3(A)
 \quad\Longleftrightarrow\quad
-24\operatorname{per}(A)-2-
+24\mathrm{per}(A)-2-
 \sum_{i,j=1}^4a_{ij}^3\ge0.
 $$
 
@@ -369,7 +369,7 @@ left.
 For each column $c$, define its complementary permanent sum by
 
 $$
-S_c(A)=\sum_{r=1}^4\operatorname{per}(A(r\mid c)).
+S_c(A)=\sum_{r=1}^4\mathrm{per}(A(r\mid c)).
 $$
 
 Thus $S_c(A)$ is the sum of the four $3\times3$ permanents obtained by
@@ -382,7 +382,7 @@ The main target, Merris' conjectured inequality in dimension four, is
 
 $$
 \boxed{
-4\operatorname{per}(A)\ge \min_{1\le c\le4}S_c(A).
+4\mathrm{per}(A)\ge \min_{1\le c\le4}S_c(A).
 }
 $$
 
@@ -390,7 +390,7 @@ Equivalently, choose a column $c_{\min}$ satisfying
 $S_{c_{\min}}(A)=\min_c S_c(A)$ and prove
 
 $$
-4\operatorname{per}(A)\ge S_{c_{\min}}(A).
+4\mathrm{per}(A)\ge S_{c_{\min}}(A).
 $$
 
 This follows directly from the stronger Holens--Đoković `(4,4)` result.
@@ -407,7 +407,7 @@ $$
 $$
 
 Combining this with
-$16\operatorname{per}(A)\ge\sigma_3(A)$ and dividing by $4$ gives the
+$16\mathrm{per}(A)\ge\sigma_3(A)$ and dividing by $4$ gives the
 Merris bound.
 
 The auxiliary Lean theorem `merris_n4_of_fourth_column_minimal` fixes
@@ -420,7 +420,7 @@ S_4(A)\le S_2(A),\qquad
 S_4(A)\le S_3(A),
 $$
 
-and its conclusion is $4\operatorname{per}(A)\ge S_4(A)$. The main theorem
+and its conclusion is $4\mathrm{per}(A)\ge S_4(A)$. The main theorem
 `merris_n4` no longer requires this choice: it uses `Finset.univ.inf'` to take
 the minimum of $S_c(A)$ over all four columns directly.
 
