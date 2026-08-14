@@ -82,7 +82,7 @@ in an earlier version of the development.
 |---|---|
 | Result | Lean-checked proof artifact |
 | Status | Formalization complete; independent external review not recorded |
-| Proof date | 2026-08-13 |
+| Proof date | 2026-08-14 |
 | Institution | East China Normal University |
 | Main objective | Merris' conjecture for `n = 4` |
 | Proof route | Holens--Đoković `(n,i)=(4,4)` implies Merris `n = 4` |
