@@ -1,0 +1,11 @@
+name = "MerrisN4"
+version = "1.0.0"
+defaultTargets = ["MerrisN4"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.30.0-rc1"
+
+[[lean_lib]]
+name = "MerrisN4"
